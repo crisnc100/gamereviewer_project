@@ -1,0 +1,19 @@
+# Node.js
+node_modules/
+npm-debug.log
+.env
+
+# Logs
+logs/
+*.log
+
+# React build
+client/build
+
+# OS-specific files
+.DS_Store
+
+# Other
+.vscode/
+.idea/
+*.swp
