@@ -1,6 +1,8 @@
 // Connection to MySQL, installed mysql12 and bycrpt
 import { Sequelize } from 'sequelize';
 import dotenv from 'dotenv';
+/*Using sequelize to allow for better interactivity with the database by using 
+javascript objects and methods instead of raw queries. Maintains better readability*/
 
 dotenv.config();
 
