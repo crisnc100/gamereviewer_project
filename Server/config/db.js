@@ -1,3 +1,4 @@
+// Connection to MySQL, installed mysql12 and bycrpt
 import { Sequelize } from 'sequelize';
 import dotenv from 'dotenv';
 

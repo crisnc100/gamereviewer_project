@@ -2,6 +2,7 @@ import { DataTypes } from 'sequelize';
 import bcrypt from 'bcrypt';
 import sequelize from '../config/db.js';
 
+//Defining the User Schema from the database:
 const User = sequelize.define('User', {
   firstName: {
     type: DataTypes.STRING,
@@ -35,6 +36,13 @@ const User = sequelize.define('User', {
       notEmpty: true
     }
   }
+}, {
+  //Very important since I had underscored column names, wasn't working without it!
+  tableName: 'Users',
+  underscored: true,
+  timestamps: true,
+  createdAt: 'created_at',
+  updatedAt: 'updated_at'
 });
 
 // Hashing the password before saving
