@@ -17,3 +17,5 @@ client/build
 .vscode/
 .idea/
 *.swp
+
+/Server
