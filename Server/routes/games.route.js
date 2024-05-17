@@ -1,13 +1,14 @@
 import { Router } from 'express';
+import GamesController from '../controllers/games.controller.js';
 
-const router = Router();
-
-
-
+const gamesRouter = Router();
 
 
 
 
 
 
-export default router;
+
+
+
+export default gamesRouter;
