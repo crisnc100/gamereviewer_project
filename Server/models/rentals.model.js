@@ -3,7 +3,7 @@ import sequelize from '../config/db.js';
 import User from './users.model.js';
 import Games from './games.model.js';
 
-const Rentals = sequelize.define('Review', {
+const Rentals = sequelize.define('Rentals', {
     rentalDate: {
         type: DataTypes.DATE,
         allowNull: false,
