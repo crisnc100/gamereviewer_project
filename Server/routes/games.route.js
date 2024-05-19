@@ -2,40 +2,32 @@ import { Router } from 'express';
 import GamesController from '../controllers/games.controller.js';
 import ReviewsController from '../controllers/reviews.controller.js';
 import FavoritesController from '../controllers/favorites.controller.js';
-
+import RentalsController from '../controllers/rentals.controller.js';
 
 
 const gamesRouter = Router();
-//All get methods for games/getting all reviews and favorites
-gamesRouter.get('/allGames', GamesController.getAllGames)
-gamesRouter.get('/allReviews/:gameId', GamesController.getGameReviews)
-gamesRouter.get('/allFavorites/:gameId', GamesController.getGameFavorites)
 
-//All post methods for rentals/favorites (creating)
-gamesRouter.post('/rent/:gameId', GamesController.rentGame)
-gamesRouter.post('/return/:rentalId', GamesController.returnGame)
-gamesRouter.post('/review/:gameId', GamesController.writeReview)
-gamesRouter.post('/favorite/:gameId', GamesController.favoriteGame)
+//Methods for games/getting all reviews and favorites from a game
+gamesRouter.get('/allGames', GamesController.getAllGames)
+gamesRouter.get('/allReviews/:gameId', GamesController.getGameReviewsByGame)
+gamesRouter.get('/allFavorites/:gameId', GamesController.getGameFavoritesByGame)
+
+//Rental Routes
+gamesRouter.post('/rent/:gameId', RentalsController.rentGame)
+gamesRouter.post('/return/:rentalId', RentalsController.returnGame)
 
 //Reviews Routes: 
-
+gamesRouter.post('/new-review/:gameId', ReviewsController.writeReview)
+gamesRouter.get('/reviews/:userId', ReviewsController.getReviewsByUserId)
 gamesRouter.route('/reviews/:id')
     .get(ReviewsController.getReviewById)
     .put(ReviewsController.updateReview)
     .delete(ReviewsController.deleteReview)
 
-
 //Favorites Routes:
-gamesRouter.route('/favorites/:id')
-    .get(FavoritesController.getFavoriteById)
-    .delete(FavoritesController.deleteFavorite)
-
-
-
-
-
-
-
+gamesRouter.post('/new-favorite/:gameId', FavoritesController.favoriteGame)
+gamesRouter.get('/favorites/:userId', FavoritesController.getFavoriteByUserId)
+gamesRouter.delete('/favorites/:id', FavoritesController.removeFavorite)
 
 
 export default gamesRouter;
