@@ -1,8 +1,8 @@
 import { Router } from 'express';
 import UserController from '../controllers/users.controller.js'; 
-//API routes for user
-const userRouter = Router();
 
+const userRouter = Router();
+//API routes for user
 
 userRouter.post('/register', UserController.registerUser);
 
