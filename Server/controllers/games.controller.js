@@ -5,7 +5,7 @@ import Rentals from '../models/rentals.model.js';
 
 
 const GamesController = {
-    //Getting all games from the games API
+    //Getting all games from the games
     getAllGames: async (req, res) => {
         try {
             const games = await Games.findAll({order: [['genre', 'ASC']]});

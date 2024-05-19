@@ -1,4 +1,4 @@
-import Reviews from '../models/reviews.model.js'; // Ensure correct path and file extension
+import Reviews from '../models/reviews.model.js'; 
 
 const ReviewsController = {
     getReviewById: async (req, res) => {
