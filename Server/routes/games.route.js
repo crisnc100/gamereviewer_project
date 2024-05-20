@@ -14,14 +14,4 @@ gamesRouter.post('/:rentalId/return', GamesController.returnGame)
 gamesRouter.post('/:gameId/review', GamesController.writeReview)
 gamesRouter.post('/:gameId/favorite', GamesController.favoriteGame)
 
-
-
-
-
-
-
-
-
-
-
 export default gamesRouter;
