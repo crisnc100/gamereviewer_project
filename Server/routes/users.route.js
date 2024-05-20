@@ -12,8 +12,8 @@ userRouter.post("/login", UserController.loginUser);
 userRouter.get("/users", authenticateToken, UserController.getAllUsers);
 
 userRouter.route("/users/:id")
-    .get(UserController.getOneUser)
-    .put(UserController.updateUser)
-    .delete(UserController.deleteUser)
+    .get(authenticateToken, UserController.getOneUser)
+    .put(authenticateToken, UserController.updateUser)
+    .delete(authenticateToken, UserController.deleteUser)
 
 export default userRouter;
