@@ -1,17 +1,17 @@
 import { Router } from 'express';
 import UserController from '../controllers/users.controller.js'; 
-//API routes for user
+import { authenticateToken } from "../config/jwt.config.js";
+
 const userRouter = Router();
+//API routes for user
 
+userRouter.post("/register", UserController.registerUser);
 
-userRouter.post('/register', UserController.registerUser);
+userRouter.post("/login", UserController.loginUser);
 
-userRouter.post('/login', UserController.loginUser);
+userRouter.get("/users", authenticateToken, UserController.getAllUsers);
 
-userRouter.route('/users')
-    .get(UserController.getAllUsers)
-
-userRouter.route('/users/:id')
+userRouter.route("/users/:id")
     .get(UserController.getOneUser)
     .put(UserController.updateUser)
     .delete(UserController.deleteUser)

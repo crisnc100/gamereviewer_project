@@ -1,60 +1,56 @@
-import { useEffect, useState } from "react"
-import axios from 'axios'
+import { useEffect, useState } from "react";
+import axios from "axios";
 
-const Dashboard = (props) => {
+const Dashboard = () => {
+    const [users, setUsers] = useState([]);
+    const [error, setError] = useState(null);
 
-const {viewReview, setReviewPage} = useState(false)
-const {currentUser} = props
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+        if (!token) {
+            setError("No token found");
+            return;
+        }
 
-// Grab all games
-useEffect(() => {
-    axios.get('http://localhost:8000/api/')
-})
-
-
+        axios
+            .get("http://localhost:8000/api/users", {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            })
+            .then((res) => {
+                console.log(res.data);
+                setUsers(res.data);
+            })
+            .catch((err) => {
+                console.log(err);
+                setError(err.message);
+            });
+    }, []);
     return (
-        <>
-            <div>
-                <h1>Welcome currentUser</h1>
-                <h2>Reviews from others:</h2>
-
-                <table class="table align-middle mb-0 bg-grey">
-                    <thead>
-                        <tr>
-                            <th></th>
+        <div className="container">
+            <h1>Dashboard</h1>
+            <table className="table table-secondary table-bordered">
+                <thead>
+                    <tr>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {users.map((user, index) => (
+                        <tr key={index}>
+                            <td>{user.firstName}</td>
+                            <td>{user.lastName}</td>
+                            <td>{user.email}</td>
                         </tr>
-                    </thead>
-                </table>
-            </div>
-        </>
-    )
-}
-export default Dashboard
+                    ))}
+                </tbody>
+            </table>
+        </div>
+    );
+};
 
+export default Dashboard;
 
-// Ignore this
-{/* <form action="">
-
-<div>
-    <label htmlFor="firstName"></label>
-    <input type="text" name="firstName" placeholder="First Name" />
-</div>
-
-<div>
-    <label htmlFor="lastName"></label>
-    <input type="text" name="lastName" placeholder="Last Name" />
-</div>
-
-
-<div>
-    <label htmlFor="email"></label>
-    <input type="text" name="email" placeholder="email" />
-</div>
-
-<div>
-    <label htmlFor="password"></label>
-    <input type="text" name="password" placeholder="password" />
-</div>
-
-
-</form> */}

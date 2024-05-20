@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
+import cookieParser from "cookie-parser";
 import sequelize from "./config/db.js";
 import userRouter from "./routes/users.route.js";
 import gamesRouter from "./routes/games.route.js";
@@ -10,7 +11,11 @@ javascript objects and methods instead of raw queries. Maintains better readabil
 dotenv.config();
 
 const app = express();
-app.use(express.json(), cors());
+app.use(cookieParser());
+app.use(
+  express.json(),
+  cors({ credentials: true, origin: "http://localhost:5173" })
+);
 
 //Testing the connection to mysql database here:
 sequelize

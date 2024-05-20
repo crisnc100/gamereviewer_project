@@ -34,7 +34,7 @@ const Games = sequelize.define('Games',{
     //Getting the foreign key of users table ID
     userId: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
         references: {
             model: User,
             key: 'id'

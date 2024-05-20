@@ -40,7 +40,7 @@ const User = sequelize.define(
     },
   },
   {
-    //Very important since I had underscored column names, wasn't working without it!
+    //Very important since I had underscored column names in the DB, wasn't working without it!
     tableName: "Users",
     underscored: true,
     timestamps: true,
