@@ -7,6 +7,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
+
     if (!token) {
       setError("No token found");
       return;
@@ -48,6 +49,7 @@ const Dashboard = () => {
           ))}
         </tbody>
       </table>
+      <button onClick={logout}></button>
     </div>
   );
 };

@@ -42,9 +42,7 @@ const UserController = {
       }
 
       // Generate JWT token
-      const token = jwt.sign({ userId: user.id }, process.env.SECRET_KEY, {
-        expiresIn: "1h",
-      });
+      const token = jwt.sign({ userId: user.id }, process.env.SECRET_KEY);
 
       // Set token in HTTP-only cookie
       res.cookie("token", token, {
@@ -56,6 +54,10 @@ const UserController = {
     } catch (err) {
       res.status(500).json({ error: err.message });
     }
+  },
+  logout: (req, res) => {
+    res.clearCookie("token");
+    res.sendStatus(200);
   },
 
   getAllUsers: async (req, res) => {
