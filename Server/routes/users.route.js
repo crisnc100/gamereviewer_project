@@ -11,7 +11,7 @@ userRouter.post("/login", UserController.loginUser);
 
 userRouter.post("/logout", UserController.logoutUser);
 
-userRouter.get("/users", authenticateToken, UserController.getAllUsers);
+userRouter.get("/users", UserController.getAllUsers);
 
 userRouter
   .route("/users/:id")

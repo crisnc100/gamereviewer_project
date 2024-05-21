@@ -2,7 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const Home = () => {
+const Home = (props) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -12,6 +12,8 @@ const Home = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState([]);
   const navigate = useNavigate();
+
+  const { userUpdater } = props
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -34,6 +36,8 @@ const Home = () => {
       if (response.data.token) {
         console.log("LINE 35: Home.jsx", response.data)
         localStorage.setItem("token", response.data.token);
+        // Update user
+        userUpdater(response.data.user)
         navigate("/dashboard");
       }
     } catch (err) {
@@ -54,10 +58,12 @@ const Home = () => {
         password: loginPassword,
       });
       console.log(response.data);
-      console.log(response.data.token);
+      console.log('Line 57: Home.jsx ', response.data.token);
 
       if (response.data.token) {
         localStorage.setItem("token", response.data.token);
+        // Update user
+        userUpdater(response.data.user)
         navigate("/dashboard");
       }
     } catch (error) {
@@ -65,6 +71,7 @@ const Home = () => {
       setError("Invalid email or password.");
     }
   };
+
 
   return (
     <div className="container w-75 mt-4">

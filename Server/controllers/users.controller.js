@@ -9,9 +9,9 @@ const UserController = {
     //Check for other emails if available
     try {
       const { email } = req.body;
-      const potenialUser = await User.findOne({ where: { email } });
+      const potenialUser = await User.findOne({ where: { email } })
       if (potenialUser) {
-        res.status(400).json({ message: "This email is already in use" });
+        res.status(400).json({ message: "Email is already in use" })
       }
       // Account created
       else {
@@ -117,9 +117,9 @@ const UserController = {
     }
   },
   logoutUser: (req, res) => {
-    res.clearCookie("token");
-    res.status(200).json({ message: "Logged out account" });
-  },
+    res.clearCookie('token')
+    res.status(200).json({ message: 'Logged out account' })
+  }
 };
 
 export default UserController;

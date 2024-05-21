@@ -11,11 +11,11 @@ javascript objects and methods instead of raw queries. Maintains better readabil
 dotenv.config();
 
 const app = express();
-app.use(cookieParser());
 app.use(
   express.json(),
   cors({ credentials: true, origin: "http://localhost:5173" })
 );
+app.use(cookieParser());
 
 //Testing the connection to mysql database here:
 sequelize
@@ -34,6 +34,7 @@ sequelize.sync().then(() => {
 //Middleware:
 app.use("/api", userRouter);
 app.use("/api", gamesRouter);
+
 
 app.listen(process.env.PORT, () => {
   console.log("Server is running on port" + process.env.PORT);
