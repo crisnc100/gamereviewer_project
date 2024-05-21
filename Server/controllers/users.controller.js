@@ -72,30 +72,6 @@ const UserController = {
     }
   },
 
-  // My Login - chavezBranch
-  //   try {
-  //     const {email, password} = req.body;
-  //     const user = await User.findOne({where: {email}})
-  //     // { where: { email } }
-  //     if(user) {
-  //       const correctPassword = await bcrypt.compare(req.body.password, user.password)
-  //       if(correctPassword) {
-  //         const token = jwt.sign({id: user.id, email: user.email}, process.env.SECRET_KEY, {expiresIn: '2h'})
-  //         res.status(201).cookie('token', token, {httpOnly:true, maxAge: 2* 60 * 60 * 100, secure: process.env.NODE_ENV === "production"}).json(user)
-  //       }
-  //       else {
-  //         res.status(400).json({message: 'Ivalid Email/Password'})
-  //       }
-  //     }
-  //     else {
-  //       res.status(400).json({message: 'Ivalid Email/Password'})
-  //     }
-  //   }
-  //   catch(error) {
-  //     res.status(400).json({error: error})
-  //   }
-  // },
-
   getAllUsers: async (req, res) => {
     try {
       const users = await User.findAll();

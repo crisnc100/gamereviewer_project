@@ -38,17 +38,16 @@ const rentalHandler = (e) => {
 }
 
     return (
-        <div class="container">
+        <div className="container">
             <h1>All Games</h1>
             <div> <p>* Sort by genre</p></div>
 
-            <table class="table table-secondary table-bordered">
+            <table className="table table-secondary table-bordered">
                 <thead>
                 </thead>
                 <tbody>
                     {games.map((game) => (
                         <tr key={game.id}>
-                            {setGameId(game.id)}
                             <td>{game.title}</td>
                             <td><button class='btn btn-primary'>{game.isRented} Rent</button></td>
                             <td><button class='btn btn-success'>Write a review</button></td>
