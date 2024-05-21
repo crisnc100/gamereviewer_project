@@ -32,7 +32,7 @@ const Dashboard = (props) => {
             });
     }, []);
 
-    const logoutHandler = () => {
+    const logoutHandler2 = () => {
         axios.post('http://localhost:8000/api/logout', {}, {withCredentials: true})
             .then((res) => {
                 navigate('/')
