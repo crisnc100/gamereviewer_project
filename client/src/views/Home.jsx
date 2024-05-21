@@ -32,6 +32,7 @@ const Home = () => {
       console.log(response.data.token);
 
       if (response.data.token) {
+        console.log("LINE 35: Home.jsx", response.data)
         localStorage.setItem("token", response.data.token);
         navigate("/dashboard");
       }

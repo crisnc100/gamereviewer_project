@@ -1,30 +1,41 @@
 import User from "../models/users.model.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import { where } from "sequelize";
 
 //All CRUD Logic Here:
 const UserController = {
   registerUser: async (req, res) => {
+    //Check for other emails if available
     try {
-      const { firstName, lastName, email, password } = req.body;
-      const newUser = await User.create({
-        firstName,
-        lastName,
-        email,
-        password,
-      });
+      const { email } = req.body;
+      const potenialUser = await User.findOne({ where: { email } });
+      if (potenialUser) {
+        res.status(400).json({ message: "This email is already in use" });
+      }
+      // Account created
+      else {
+        const { firstName, lastName, email, password } = req.body;
+        const newUser = await User.create({
+          firstName,
+          lastName,
+          email,
+          password,
+        });
 
-      // Generate JWT token
-      const token = jwt.sign({ userId: newUser.id }, process.env.SECRET_KEY, {
-        expiresIn: "1h",
-      });
-
-      // Set token in HTTP-only cookie
-      res.cookie("token", token, {
-        httpOnly: true,
-        source: process.env.NODE_ENV === "production",
-      });
-      res.status(201).json({ user: newUser, token });
+        // Generate JWT token
+        const token = jwt.sign({ userId: newUser.id }, process.env.SECRET_KEY, {
+          expiresIn: "1h",
+        });
+        console.log(token);
+        // Set token in HTTP-only cookie
+        res.cookie("token", token, {
+          httpOnly: true,
+          source: process.env.NODE_ENV === "production",
+          maxAge: 2 * 60 * 60 * 1000,
+        });
+        res.status(201).json({ user: newUser, token });
+      }
     } catch (err) {
       res.status(400).json({ error: err.message });
     }
@@ -42,11 +53,14 @@ const UserController = {
       }
 
       // Generate JWT token
-      const token = jwt.sign({ userId: user.id }, process.env.SECRET_KEY);
+      const token = jwt.sign({ userId: user.id }, process.env.SECRET_KEY, {
+        expiresIn: "1h",
+      });
 
       // Set token in HTTP-only cookie
       res.cookie("token", token, {
         httpOnly: true,
+        maxAge: 2 * 60 * 60 * 100,
         secure: process.env.NODE_ENV === "production",
       });
 
@@ -101,6 +115,10 @@ const UserController = {
     } catch (error) {
       res.status(500).json({ message: error.message });
     }
+  },
+  logoutUser: (req, res) => {
+    res.clearCookie("token");
+    res.status(200).json({ message: "Logged out account" });
   },
 };
 

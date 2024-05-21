@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
+  const navigate = useNavigate();
   const [users, setUsers] = useState([]);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-
     if (!token) {
       setError("No token found");
       return;
@@ -49,7 +50,6 @@ const Dashboard = () => {
           ))}
         </tbody>
       </table>
-      <button onClick={logout}></button>
     </div>
   );
 };
