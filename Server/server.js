@@ -5,6 +5,8 @@ import cookieParser from "cookie-parser";
 import sequelize from "./config/db.js";
 import userRouter from "./routes/users.route.js";
 import gamesRouter from "./routes/games.route.js";
+import rentalRouter from "./routes/rentals.route.js";
+import reviewRouter from "./routes/reviews.route.js";
 /*Using sequelize to allow for better interactivity with the database by using 
 javascript objects and methods instead of raw queries. Maintains better readability*/
 
@@ -34,6 +36,8 @@ sequelize.sync().then(() => {
 //Middleware:
 app.use("/api", userRouter);
 app.use("/api", gamesRouter);
+app.use("/api", rentalRouter);
+app.use('/api', reviewRouter)
 
 
 app.listen(process.env.PORT, () => {

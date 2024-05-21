@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Dashboard = (props) => {
     const navigate = useNavigate()
@@ -46,7 +47,8 @@ const Dashboard = (props) => {
         <div className="container">
             <h1>Dashboard</h1>
             <h3>Welcome {currentUser.firstName}</h3>
-            <button onClick={logoutHandler}>Logout</button>
+            <button onClick={logoutHandler2}>Logout</button>
+            <p><Link to={'/dashboard/search-games'}>Games Dashboard</Link></p>
 
             <table className="table table-secondary table-bordered">
                 <thead>
