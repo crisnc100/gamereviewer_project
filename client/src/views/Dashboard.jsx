@@ -2,10 +2,12 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const Dashboard = () => {
+const Dashboard = (props) => {
     const navigate = useNavigate()
     const [users, setUsers] = useState([]);
     const [error, setError] = useState(null);
+
+    const {currentUser} = props
 
     useEffect(() => {
         const token = localStorage.getItem("token");
@@ -43,6 +45,7 @@ const Dashboard = () => {
     return (
         <div className="container">
             <h1>Dashboard</h1>
+            <h3>Welcome {currentUser.firstName}</h3>
             <button onClick={logoutHandler}>Logout</button>
             <table className="table table-secondary table-bordered">
                 <thead>

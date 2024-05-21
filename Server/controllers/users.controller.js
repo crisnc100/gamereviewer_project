@@ -9,10 +9,10 @@ const UserController = {
 
     //Check for other emails if available
     try {
-      const {email} = req.body;
+      const { email } = req.body;
       const potenialUser = await User.findOne({ where: { email } })
-      if(potenialUser) {
-        res.status(400).json({message: "This email is already in use"})
+      if (potenialUser) {
+        res.status(400).json({ message: "Email is already in use" })
       }
       // Account created
       else {
@@ -23,7 +23,7 @@ const UserController = {
           email,
           password,
         });
-    
+
         // Generate JWT token
         const token = jwt.sign({ userId: newUser.id }, process.env.SECRET_KEY, {
           expiresIn: "1h",
@@ -38,7 +38,7 @@ const UserController = {
         res.status(201).json({ user: newUser, token });
       }
     }
-      catch (err) {
+    catch (err) {
       res.status(400).json({ error: err.message });
     }
   },
@@ -68,9 +68,33 @@ const UserController = {
 
       res.status(200).json({ message: "Logged in successfully", user, token });
     } catch (err) {
-      res.status(500).json({ error: err.message });
+      // res.status(500).json({ error: err.message });
     }
   },
+
+  // My Login - chavezBranch
+  //   try {
+  //     const {email, password} = req.body;
+  //     const user = await User.findOne({where: {email}})
+  //     // { where: { email } }
+  //     if(user) {
+  //       const correctPassword = await bcrypt.compare(req.body.password, user.password)
+  //       if(correctPassword) {
+  //         const token = jwt.sign({id: user.id, email: user.email}, process.env.SECRET_KEY, {expiresIn: '2h'})
+  //         res.status(201).cookie('token', token, {httpOnly:true, maxAge: 2* 60 * 60 * 100, secure: process.env.NODE_ENV === "production"}).json(user)
+  //       }
+  //       else {
+  //         res.status(400).json({message: 'Ivalid Email/Password'})
+  //       }
+  //     }
+  //     else {
+  //       res.status(400).json({message: 'Ivalid Email/Password'})
+  //     }
+  //   }
+  //   catch(error) {
+  //     res.status(400).json({error: error})
+  //   }
+  // },
 
   getAllUsers: async (req, res) => {
     try {
@@ -114,9 +138,9 @@ const UserController = {
       res.status(500).json({ message: error.message });
     }
   },
-  logoutUser : (req, res) => {
+  logoutUser: (req, res) => {
     res.clearCookie('token')
-    res.status(200).json({message: 'Logged out account'})
+    res.status(200).json({ message: 'Logged out account' })
   }
 };
 
