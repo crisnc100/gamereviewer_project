@@ -8,7 +8,7 @@ import { authenticateToken } from "../config/jwt.config.js";
 const gamesRouter = Router();
 
 //Methods for games/getting all reviews and favorites from a game
-gamesRouter.get("/allGames", authenticateToken, GamesController.getAllGames);
+gamesRouter.get("/allGames", GamesController.getAllGames);
 gamesRouter.get("/allReviews/:gameId", GamesController.getGameReviewsByGame);
 gamesRouter.get("/allFavorites/:gameId",GamesController.getGameFavoritesByGame);
 
