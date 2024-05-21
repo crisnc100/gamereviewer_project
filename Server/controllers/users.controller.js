@@ -6,7 +6,6 @@ import { where } from "sequelize";
 //All CRUD Logic Here:
 const UserController = {
   registerUser: async (req, res) => {
-
     //Check for other emails if available
     try {
       const { email } = req.body;
@@ -28,17 +27,16 @@ const UserController = {
         const token = jwt.sign({ userId: newUser.id }, process.env.SECRET_KEY, {
           expiresIn: "1h",
         });
-        console.log(token)
+        console.log(token);
         // Set token in HTTP-only cookie
         res.cookie("token", token, {
           httpOnly: true,
           source: process.env.NODE_ENV === "production",
-          maxAge: 2 * 60 * 60 * 1000
+          maxAge: 2 * 60 * 60 * 1000,
         });
         res.status(201).json({ user: newUser, token });
       }
-    }
-    catch (err) {
+    } catch (err) {
       res.status(400).json({ error: err.message });
     }
   },
@@ -56,7 +54,7 @@ const UserController = {
 
       // Generate JWT token
       const token = jwt.sign({ userId: user.id }, process.env.SECRET_KEY, {
-        expiresIn: "2h",
+        expiresIn: "1h",
       });
 
       // Set token in HTTP-only cookie
@@ -70,6 +68,10 @@ const UserController = {
     } catch (err) {
       res.status(500).json({ error: err.message });
     }
+  },
+  logout: (req, res) => {
+    res.clearCookie("token");
+    res.sendStatus(200);
   },
 
   getAllUsers: async (req, res) => {
