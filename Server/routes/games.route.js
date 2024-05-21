@@ -10,10 +10,7 @@ const gamesRouter = Router();
 //Methods for games/getting all reviews and favorites from a game
 gamesRouter.get("/allGames", authenticateToken, GamesController.getAllGames);
 gamesRouter.get("/allReviews/:gameId", GamesController.getGameReviewsByGame);
-gamesRouter.get(
-  "/allFavorites/:gameId",
-  GamesController.getGameFavoritesByGame
-);
+gamesRouter.get("/allFavorites/:gameId",GamesController.getGameFavoritesByGame);
 
 //Rental Routes
 gamesRouter.post("/rent/:gameId", RentalsController.rentGame);
@@ -23,10 +20,10 @@ gamesRouter.post("/return/:rentalId", RentalsController.returnGame);
 gamesRouter.post("/new-review/:gameId", ReviewsController.writeReview);
 gamesRouter.get("/reviews/:userId", ReviewsController.getReviewsByUserId);
 gamesRouter
-  .route("/reviews/:id")
-  .get(ReviewsController.getReviewById)
-  .put(ReviewsController.updateReview)
-  .delete(ReviewsController.deleteReview);
+    .route("/reviews/:id")
+    .get(ReviewsController.getReviewById)
+    .put(ReviewsController.updateReview)
+    .delete(ReviewsController.deleteReview);
 
 //Favorites Routes:
 gamesRouter.post("/new-favorite/:gameId", FavoritesController.favoriteGame);
