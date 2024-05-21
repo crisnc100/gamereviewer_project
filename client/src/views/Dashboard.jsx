@@ -31,6 +31,17 @@ const Dashboard = (props) => {
                 setError(err.message);
             });
     }, []);
+
+      const logoutHandler = () => {
+        axios.post('http://localhost:8000/api/logout', {}, {withCredentials: true})
+            .then((res) => {
+                navigate('/')
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+    }
+    
     return (
         <div className="container">
             <h1>Dashboard</h1>
