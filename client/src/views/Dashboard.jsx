@@ -33,7 +33,7 @@ const Dashboard = (props) => {
             });
     }, []);
 
-    const logoutHandler2 = () => {
+      const logoutHandler = () => {
         axios.post('http://localhost:8000/api/logout', {}, {withCredentials: true})
             .then((res) => {
                 navigate('/')
@@ -42,9 +42,7 @@ const Dashboard = (props) => {
                 console.log(error)
             })
     }
-
-    // Temporary navigate to /dashboard/search-games
-
+    
     return (
         <div className="container">
             <h1>Dashboard</h1>
