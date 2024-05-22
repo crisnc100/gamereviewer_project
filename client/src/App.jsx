@@ -25,7 +25,6 @@ function App() {
           <Route index element={<Dashboard currentUser={currentUser} />} />
           <Route path="all-games" element={<GamesPage currentUser={currentUser} />} />
           <Route path="profile" element={<Profile currentUser={currentUser} />} />
-       
         </Route>
       </Routes>
     </BrowserRouter>

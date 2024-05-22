@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import axios from "axios"
 import { Link } from "react-router-dom"
+import CreateReview from "../components/CreateReview.jsx"
 
 const GamesPage = (props) => {
 
@@ -34,7 +35,7 @@ const GamesPage = (props) => {
 
         axios.post(`http://localhost:8000/api/rental/${1}`, { userId }, { withCredentials: true })
             .then((res) => {
-
+                console.log('Game rented')
             })
             .catch((error) => {
                 console.log('Could not rent game')
@@ -56,27 +57,7 @@ const GamesPage = (props) => {
                             <td><button onClick={rentalHandler} className='btn btn-primary'>{game.id} Rent</button></td>
                             <td>
                                 {/* <button class='btn btn-success'>Write a review</button> */}
-                                {/* <!-- Button trigger modal --> */}
-                                <button type="button" class="btn btn-primary" data-mdb-ripple-init data-mdb-modal-init data-mdb-target="#exampleModal">
-                                    Launch demo modal
-                                </button>
-
-                                {/* <!-- Modal --> */}
-                                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                                                <button type="button" class="btn-close" data-mdb-ripple-init data-mdb-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">...</div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-mdb-ripple-init data-mdb-dismiss="modal">Close</button>
-                                                <button type="button" class="btn btn-primary" data-mdb-ripple-init>Save changes</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                <CreateReview currentUser={currentUser}/>
                             </td>
                             <td><button class='btn btn-info'> Favorite</button></td>
                         </tr>
