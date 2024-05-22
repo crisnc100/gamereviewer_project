@@ -3,68 +3,51 @@ import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 
 const Dashboard = (props) => {
-    const navigate = useNavigate();
-    const [users, setUsers] = useState([]);
-    const [error, setError] = useState(null);
+  const navigate = useNavigate();
+  const [users, setUsers] = useState([]);
+  const [error, setError] = useState(null);
+  const { currentUser } = props;
 
-    const { currentUser } = props
-
-    useEffect(() => {
-        const token = localStorage.getItem("token");
-        if (!token) {
-            setError("No token found");
-            return;
-        }
-
-        axios
-            .get("http://localhost:8000/api/users", {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            })
-            .then((res) => {
-                setUsers(res.data);
-            })
-            .catch((err) => {
-                setError(err.message);
-            });
-    }, []);
-
-    const logoutHandler = () => {
-        axios.post('http://localhost:8000/api/logout', {}, { withCredentials: true })
-            .then((res) => {
-                navigate('/')
-            })
-            .catch((error) => {
-                console.log(error)
-            })
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      setError("No token found");
+      return;
     }
 
-    return (
-        <div className="container">
-            <h1>Dashboard</h1>
-            <h3>Welcome {currentUser.firstName}!</h3>
+    axios
+      .get("http://localhost:8000/api/users", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => {
+        setUsers(res.data);
+      })
+      .catch((err) => {
+        setError(err.message);
+      });
+  }, []);
 
-            <table className="table table-secondary table-bordered">
-                <thead>
-                    <tr>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Email</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {users.map((user, index) => (
-                        <tr key={index}>
-                            <td>{user.firstName}</td>
-                            <td>{user.lastName}</td>
-                            <td>{user.email}</td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
-        </div>
-    );
+  return (
+    <div className="container">
+      <h1>Welcome {currentUser.firstName}!</h1>
+      <h3 className="text-center">User Reviews</h3>
+      <div className=" d-flex flex-column align-items-center">
+        {reviews.map((review, index) => (
+          <div key={index} className="border-bottom border-secondary w-75 p-3">
+            <h4 className="fw-bold">
+              {review.User.firstName} {review.User.lastName} on{" "}
+              {review.Game.title}
+            </h4>
+            <p>{review.reviewText}</p>
+            <p>{new Date(review.created_at).toLocaleDateString()}</p>
+            <p>{review.rating}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 };
 
 export default Dashboard;
