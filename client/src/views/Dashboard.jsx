@@ -4,7 +4,6 @@ import { useNavigate, Link } from "react-router-dom";
 
 const Dashboard = (props) => {
     const navigate = useNavigate();
-    const [users, setUsers] = useState([]);
     const [error, setError] = useState(null);
     const { currentUser } = props;
     const [reviews, setReviews] = useState([])
