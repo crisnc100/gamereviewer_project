@@ -46,7 +46,6 @@ const rentalHandler = (e) => {
             <h1>All Games</h1>
             <div> <p>* Sort by genre</p></div>
             <p>Current User's ID: {currentUser.id}</p>
-            <button><Link to={'/dashboard'}>Home</Link></button>
             <table className="table table-secondary table-bordered">
                 <thead>
                 </thead>
