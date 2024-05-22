@@ -8,7 +8,7 @@ const Dashboard = (props) => {
     const [users, setUsers] = useState([]);
     const [error, setError] = useState(null);
 
-    const {currentUser} = props
+    const { currentUser } = props
 
     useEffect(() => {
         const token = localStorage.getItem("token");
@@ -33,8 +33,8 @@ const Dashboard = (props) => {
             });
     }, []);
 
-      const logoutHandler = () => {
-        axios.post('http://localhost:8000/api/logout', {}, {withCredentials: true})
+    const logoutHandler = () => {
+        axios.post('http://localhost:8000/api/logout', {}, { withCredentials: true })
             .then((res) => {
                 navigate('/')
             })
@@ -42,12 +42,12 @@ const Dashboard = (props) => {
                 console.log(error)
             })
     }
-    
+
     return (
         <div className="container">
             <h1>Dashboard</h1>
             <h3>Welcome {currentUser.firstName}</h3>
-            <button onClick={logoutHandler2}>Logout</button>
+            <button onClick={logoutHandler}>Logout</button>
             <p><Link to={'/dashboard/search-games'}>Games Dashboard</Link></p>
 
             <table className="table table-secondary table-bordered">
