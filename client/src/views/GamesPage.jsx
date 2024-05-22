@@ -11,8 +11,8 @@ const GamesPage = (props) => {
     const [userId, setUserId] = useState("")
 
     // Current User
-    const {currentUser} = props
-    
+    const { currentUser } = props
+
 
     useEffect(() => {
         axios.get('http://localhost:8000/api/allGames')
@@ -29,17 +29,17 @@ const GamesPage = (props) => {
 
 
     // Renting Handler
-const rentalHandler = (e) => {
-    e.preventDefault(e)
+    const rentalHandler = (e) => {
+        e.preventDefault(e)
 
-    axios.post(`http://localhost:8000/api/rental/${1}`, {userId}, {withCredentials: true})
-        .then((res) => {
+        axios.post(`http://localhost:8000/api/rental/${1}`, { userId }, { withCredentials: true })
+            .then((res) => {
 
-        })
-        .catch((error) => {
-            console.log('Could not rent game')
-        })
-}
+            })
+            .catch((error) => {
+                console.log('Could not rent game')
+            })
+    }
 
     return (
         <div className="container">
@@ -53,8 +53,31 @@ const rentalHandler = (e) => {
                     {games.map((game) => (
                         <tr key={game.id}>
                             <td>{game.title}</td>
-                            <td><button onClick={rentalHandler} class='btn btn-primary'>{game.id} Rent</button></td>
-                            <td><button class='btn btn-success'>Write a review</button></td>
+                            <td><button onClick={rentalHandler} className='btn btn-primary'>{game.id} Rent</button></td>
+                            <td>
+                                {/* <button class='btn btn-success'>Write a review</button> */}
+                                {/* <!-- Button trigger modal --> */}
+                                <button type="button" class="btn btn-primary" data-mdb-ripple-init data-mdb-modal-init data-mdb-target="#exampleModal">
+                                    Launch demo modal
+                                </button>
+
+                                {/* <!-- Modal --> */}
+                                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                                <button type="button" class="btn-close" data-mdb-ripple-init data-mdb-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">...</div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-mdb-ripple-init data-mdb-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-primary" data-mdb-ripple-init>Save changes</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
                             <td><button class='btn btn-info'> Favorite</button></td>
                         </tr>
                     ))}

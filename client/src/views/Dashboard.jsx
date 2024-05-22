@@ -6,7 +6,8 @@ const Dashboard = (props) => {
     const navigate = useNavigate();
     const [users, setUsers] = useState([]);
     const [error, setError] = useState(null);
-    const { currentUser } = props;
+
+    const { currentUser } = props
 
     useEffect(() => {
         const token = localStorage.getItem("token");
@@ -29,7 +30,15 @@ const Dashboard = (props) => {
             });
     }, []);
 
-   
+    const logoutHandler = () => {
+        axios.post('http://localhost:8000/api/logout', {}, { withCredentials: true })
+            .then((res) => {
+                navigate('/')
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+    }
 
     return (
         <div className="container">
