@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { useState } from 'react';
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
+import { Button, Modal } from 'react-bootstrap'; // This import helped it work!
 import { useNavigate } from 'react-router-dom';
 
 const CreateReview = (props) => {

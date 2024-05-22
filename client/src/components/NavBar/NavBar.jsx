@@ -6,7 +6,7 @@ import axios from "axios";
 
 const NavBar = () => {
   const navigate = useNavigate();
-  //Added logout logic from dashboard here:
+
   const handleLogout = () => {
     axios
       .post("http://localhost:8000/api/logout", {}, { withCredentials: true })
@@ -17,11 +17,9 @@ const NavBar = () => {
         console.log(error);
       });
   };
-  //Navbar from bootstrap, can style it much it better
+
   return (
-    <nav
-      className={`navbar navbar-expand-lg navbar-dark ${styles.navbarCustom}`}
-    >
+    <nav className={`navbar navbar-expand-lg navbar-dark ${styles.navbarCustom}`}>
       <div className="container">
         <h1
           style={{
@@ -33,24 +31,46 @@ const NavBar = () => {
         >
           GameReviewer
         </h1>
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav ml-auto">
             <li className="nav-item">
               <NavLink
-                className={`nav-link ${styles.navLink}`}
+                className={({ isActive }) =>
+                  `nav-link ${styles.navLink} ${isActive ? styles.navLinkActive : ""}`
+                }
                 to="/dashboard"
-                exact
               >
                 Home
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className={`nav-link ${styles.navLink}`} to="all-games">
+              <NavLink
+                className={({ isActive }) =>
+                  `nav-link ${styles.navLink} ${isActive ? styles.navLinkActive : ""}`
+                }
+                to="all-games"
+              >
                 All Games
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className={`nav-link ${styles.navLink}`} to="profile">
+              <NavLink
+                className={({ isActive }) =>
+                  `nav-link ${styles.navLink} ${isActive ? styles.navLinkActive : ""}`
+                }
+                to="profile"
+              >
                 Profile
               </NavLink>
             </li>

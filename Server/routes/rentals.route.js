@@ -12,9 +12,9 @@ const rentalRouter = Router()
 rentalRouter.route("/rental/:gameId")
     .post(RentalsController.rentGame)
 
-
-rentalRouter.route("/return/:gameId")
-    .post(RentalsController.returnGame)
+//Had to change to put since where updating the condition its in (available or not)
+rentalRouter.route("/return/:rentalId")
+    .put(RentalsController.returnGame)
 
 
 export default rentalRouter;
