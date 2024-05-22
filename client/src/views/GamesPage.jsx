@@ -14,6 +14,9 @@ const GamesPage = (props) => {
     // Current User
     const { currentUser } = props
 
+    // Pass user id to CREATE REVIEW component 
+    const passUserId = currentUser
+
 
     useEffect(() => {
         axios.get('http://localhost:8000/api/allGames')
@@ -33,12 +36,13 @@ const GamesPage = (props) => {
     const rentalHandler = (e) => {
         e.preventDefault(e)
 
-        axios.post(`http://localhost:8000/api/rental/${1}`, { userId }, { withCredentials: true })
+        axios.post(`http://localhost:8000/api/rental/${1}`, { userId : currentUser.id }, { withCredentials: true })
             .then((res) => {
                 console.log('Game rented')
             })
             .catch((error) => {
-                console.log('Could not rent game')
+                alert(`${error.response.data.message}`)
+                console.log('Line 36: CreateReview.jsx ', error.response.data)
             })
     }
 
@@ -54,10 +58,10 @@ const GamesPage = (props) => {
                     {games.map((game) => (
                         <tr key={game.id}>
                             <td>{game.title}</td>
-                            <td><button onClick={rentalHandler} className='btn btn-primary'>{game.id} Rent</button></td>
+                            <td><button onClick={rentalHandler} className='btn btn-primary'>{game.isRented} - Rent</button></td>
                             <td>
                                 {/* <button class='btn btn-success'>Write a review</button> */}
-                                <CreateReview currentUser={currentUser}/>
+                                <CreateReview passUserId={passUserId.id} gameId={game.id} gameTitle={game.title}/>
                             </td>
                             <td><button class='btn btn-info'> Favorite</button></td>
                         </tr>

@@ -5,4 +5,7 @@ const reviewRouter = Router();
 
 reviewRouter.route("/allReviews").get(ReviewsController.getAllReviews);
 
+reviewRouter.route('/review/:gameId')
+    .post(ReviewsController.writeReview)
+
 export default reviewRouter;
