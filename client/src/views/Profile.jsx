@@ -30,19 +30,20 @@ const Profile = (props) => {
         setError(err.message);
       });
   }, []);
+  console.log(favoriteGames.Game.title);
 
-  
-    // Grabbing current rentals by the currentUser
-  useEffect(() => {
-    axios.get(`http://localhost:8000/api/rentals/users/${currentUser.id}`)
-        .then((res) => {
-            console.log('Line 20: GamesPage.jsx ', res.data)
-      setRentedGames(res.data)
-        })
-        .catch((error) => {
-            console.log(error)
-        })
-}, [])
+  // // Grabbing current rentals by the currentUser
+  // useEffect(() => {
+  //   axios
+  //     .get(`http://localhost:8000/api/rentals/users/${currentUser.id}`)
+  //     .then((res) => {
+  //       console.log("Line 20: GamesPage.jsx ", res.data);
+  //       setRentedGames(res.data);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // }, []);
 
   return (
     <div className="container mt-4">
@@ -51,7 +52,7 @@ const Profile = (props) => {
           <div className="card">
             <div className="card-body">
               <h2 className="card-title">Rented Games</h2>
-              <ul className="list-group">
+              {/* <ul className="list-group">
                 {rentedGames.map((game) => (
                   <li
                     key={game.id}
@@ -63,7 +64,7 @@ const Profile = (props) => {
                     </a>
                   </li>
                 ))}
-              </ul>
+              </ul> */}
             </div>
           </div>
         </div>
@@ -71,16 +72,7 @@ const Profile = (props) => {
           <div className="card">
             <div className="card-body">
               <h2 className="card-title">Favorite Games</h2>
-              <ul className="list-group">
-                {favoriteGames.map((favoriteGame, index) => (
-                  <li
-                    key={index}
-                    className="list-group-item d-flex justify-content-between align-items-center"
-                  >
-                    {favoriteGame.Game.title}
-                  </li>
-                ))}
-              </ul>
+              <p>{favoriteGames.Game.title}</p>
             </div>
           </div>
         </div>
