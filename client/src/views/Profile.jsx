@@ -31,6 +31,19 @@ const Profile = (props) => {
       });
   }, []);
 
+  
+    // Grabbing current rentals by the currentUser
+  useEffect(() => {
+    axios.get(`http://localhost:8000/api/rentals/users/${currentUser.id}`)
+        .then((res) => {
+            console.log('Line 20: GamesPage.jsx ', res.data)
+      setRentedGames(res.data)
+        })
+        .catch((error) => {
+            console.log(error)
+        })
+}, [])
+
   return (
     <div className="container mt-4">
       <div className="row">

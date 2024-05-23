@@ -16,5 +16,11 @@ rentalRouter.route("/rental/:gameId")
 rentalRouter.route("/return/:rentalId")
     .put(RentalsController.returnGame)
 
+rentalRouter.route("/rentals/users/:userId")
+    .get(RentalsController.grabRentalsByUserId)
+
+rentalRouter.route("/rental/users/:userId")
+    .get(RentalsController.grabOneRental)
+
 
 export default rentalRouter;
