@@ -46,6 +46,37 @@ const RentalsController = {
         } catch (error) {
             res.status(500).json({ message: error.message });
         }
+    },
+    grabRentalsByUserId : async (req,res) => {
+        try {
+            const {userId} = req.params
+            const allRentalsByUser = await Rentals.findAll({where : {userId, returnDate: null} })
+            if(!allRentalsByUser) {
+                return res.status(404).json();
+            }
+            else {
+                res.status(200).json(allRentalsByUser)
+            }
+        }
+        catch(error) {
+            res.status(500).json(error)
+        }
+    },
+    grabOneRental : async (req, res) => {
+        try {
+            const {userId} = req.params
+            const {gameId} = req.body
+            const rental = await Rentals.findOne({where: {userId, returnDate: null }})
+            if(!rental) {
+                return res.status(404).json({message: "User is not renting this game"});
+            }
+            else {
+                res.status(200).json(rental)
+            }
+        }
+        catch(error) {
+            res.status(500).json(error)
+        }
     }
 };
 
